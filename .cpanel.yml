@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/ntb1x917/public_html/bot.ntb1.xyz
+    - cp -r * $DEPLOYPATH
