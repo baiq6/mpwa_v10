@@ -8,7 +8,7 @@
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
-    <?php $__env->slot('title', __("Reset Password")); ?>
+    <?php $__env->slot('title', __('Authenticator 2FA')); ?>
 
 	<div class="authentication-wrapper authentication-cover">
       <!-- Logo -->
@@ -58,10 +58,9 @@
         </div>
         <!-- /Left Text -->
 
-        <!-- Reset Password -->
         <div class="d-flex col-12 col-xl-4 align-items-center authentication-bg p-6 p-sm-12">
-          <div class="w-px-400 mx-auto mt-12 pt-5 position-relative">
-			<div class="position-absolute top-0 end-0 mt-6">
+          <div class="w-px-400 mx-auto mt-12 mt-5 position-relative">
+			<div class="position-absolute top-0 end-0">
 				<ul class="navbar-nav">
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 15px;">
@@ -83,8 +82,8 @@
 								</li>
 				</ul>
 			</div>
-            <?php if(session()->has('alert')): ?>
-                <?php if (isset($component)) { $__componentOriginal5194778a3a7b899dcee5619d0610f5cf = $component; } ?>
+			<?php if(session()->has('alert')): ?>
+                                <?php if (isset($component)) { $__componentOriginal5194778a3a7b899dcee5619d0610f5cf = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal5194778a3a7b899dcee5619d0610f5cf = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'theme::components.alert','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('alert'); ?>
@@ -94,9 +93,9 @@
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
-                    <?php $__env->slot('type', session('alert')['type']); ?>
-                    <?php $__env->slot('msg', session('alert')['msg']); ?>
-                 <?php echo $__env->renderComponent(); ?>
+                                    <?php $__env->slot('type', session('alert')['type']); ?>
+                                    <?php $__env->slot('msg', session('alert')['msg']); ?>
+                                 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal5194778a3a7b899dcee5619d0610f5cf)): ?>
 <?php $attributes = $__attributesOriginal5194778a3a7b899dcee5619d0610f5cf; ?>
@@ -107,51 +106,57 @@
 <?php unset($__componentOriginal5194778a3a7b899dcee5619d0610f5cf); ?>
 <?php endif; ?>
             <?php endif; ?>
-            <h4 class="mb-1"><?php echo e(__('Reset Password')); ?></h4>
-            <p class="mb-6">
-              <span class="fw-medium"><?php echo e(__('Enter your email address to send a reset link')); ?></span>
+            <h4 class="mb-1"><?php echo e(__('Authenticator 2FA')); ?></h4>
+            <p class="text-start mb-6">
+              <?php echo e(__('Enter the code shown on the Authenticator app')); ?>
+
             </p>
-            <form id="formAuthentication" class="mb-6" action="<?php echo e(route('password.email')); ?>" method="POST">
+            <p class="mb-0"><?php echo e(__('Type your 6 digit security code')); ?></p>
+            <form id="twoStepsForm" action="<?php echo e(route('2fa.verify')); ?>" method="POST">
 			  <?php echo csrf_field(); ?>
-			  <div class="mb-6 form-password-toggle form-control-validation">
-                <label class="form-label" for="password"><?php echo e(__('Email')); ?></label>
-                <div class="input-group input-group-merge">
+              <div class="mb-6 form-control-validation">
+                <div class="auth-input-wrapper d-flex align-items-center justify-content-between numeral-mask-wrapper">
                   <input
-                    type="email"
-                    id="email"
-                    class="form-control <?php echo e($errors->has('email') ? 'is-invalid' : ''); ?>"
-                    name="email"
-                    placeholder="<?php echo e(__('email')); ?>"
-                    aria-describedby="email" />
-				  <p class="text-danger">
-                    <?php $__errorArgs = ['email'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                        <?php echo e($message); ?>
-
-                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                  </p>
+                    type="tel"
+                    class="form-control auth-input h-px-50 text-center numeral-mask mx-sm-1 my-2"
+                    maxlength="1"
+                    autofocus />
+                  <input
+                    type="tel"
+                    class="form-control auth-input h-px-50 text-center numeral-mask mx-sm-1 my-2"
+                    maxlength="1" />
+                  <input
+                    type="tel"
+                    class="form-control auth-input h-px-50 text-center numeral-mask mx-sm-1 my-2"
+                    maxlength="1" />
+                  <input
+                    type="tel"
+                    class="form-control auth-input h-px-50 text-center numeral-mask mx-sm-1 my-2"
+                    maxlength="1" />
+                  <input
+                    type="tel"
+                    class="form-control auth-input h-px-50 text-center numeral-mask mx-sm-1 my-2"
+                    maxlength="1" />
+                  <input
+                    type="tel"
+                    class="form-control auth-input h-px-50 text-center numeral-mask mx-sm-1 my-2"
+                    maxlength="1" />
                 </div>
+                <input type="hidden" name="2fa_code" />
               </div>
-              <button class="btn btn-primary d-grid w-100 mb-6"><?php echo e(__('Reset')); ?></button>
+              <button class="btn btn-primary d-grid w-100 mb-6"><?php echo e(__('Submit')); ?></button>
               <div class="text-center">
-                <a href="<?php echo e(route('login')); ?>" class="d-flex justify-content-center">
-                  <i class="icon-base ti tabler-chevron-left scaleX-n1-rtl me-1_5"></i>
-                  <?php echo e(__("Did you remember your password?")); ?>
+                <a href="<?php echo e(route('logout')); ?>" class="btn btn-danger radius-30 col-12">
+				  <?php echo e(__('Logout')); ?>
 
-                </a>
+				</a>
               </div>
             </form>
           </div>
         </div>
-        <!-- /Reset Password -->
       </div>
     </div>
+	<script src="<?php echo e(asset('js/pages-auth-two-steps.js')); ?>"></script>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginald15a047437633666527fa2baf930ea39)): ?>
@@ -161,4 +166,4 @@ unset($__errorArgs, $__bag); ?>
 <?php if (isset($__componentOriginald15a047437633666527fa2baf930ea39)): ?>
 <?php $component = $__componentOriginald15a047437633666527fa2baf930ea39; ?>
 <?php unset($__componentOriginald15a047437633666527fa2baf930ea39); ?>
-<?php endif; ?><?php /**PATH D:\laragon\www\mpwa_v10\resources\themes/vuexy/views/auth/passwords/email.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH D:\laragon\www\mpwa_v10\resources\themes/vuexy/views/auth/2fa_verify.blade.php ENDPATH**/ ?>

@@ -18,9 +18,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Coderflex\LaravelTicket\Concerns\HasTickets;
 use Coderflex\LaravelTicket\Contracts\CanUseTickets;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-	use HasTickets;
+    use HasTickets;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -43,9 +43,9 @@ class User extends Authenticatable
         'two_factor_secret',
         'recovery_codes',
         'delete_history',
-		'plan_name',
+        'plan_name',
         'plan_data',
-		'timezone'
+        'timezone'
     ];
 
     /**
@@ -103,51 +103,51 @@ class User extends Authenticatable
     // get expired subscription
     public function getExpiredSubscriptionAttribute()
     {
-		if($this->level != 'admin'){
-			if ($this->active_subscription == 'inactive') {
-				return 'No subscription';
-			} else if ($this->active_subscription == 'lifetime') {
-				return '-';
-			} else if ($this->active_subscription == 'active') {
-				$expired_date = $this->subscription_expired;
-				$expired_date = strtotime($expired_date);
-				$current_date = strtotime(date('Y-m-d H:i:s'));
-				if ($expired_date < $current_date) {
-					return Carbon::parse($this->subscription_expired)->diffForHumans();
-				} else {
-					// count days
-					$days = $expired_date - $current_date;
-					$days = $days / (60 * 60 * 24);
-					$days = round($days);
-					return __(':days days left', ['days' => $days]);
-				}
-			}
-		}else{
-			return '-';
-		}
+        if ($this->level != 'admin') {
+            if ($this->active_subscription == 'inactive') {
+                return 'No subscription';
+            } else if ($this->active_subscription == 'lifetime') {
+                return '-';
+            } else if ($this->active_subscription == 'active') {
+                $expired_date = $this->subscription_expired;
+                $expired_date = strtotime($expired_date);
+                $current_date = strtotime(date('Y-m-d H:i:s'));
+                if ($expired_date < $current_date) {
+                    return Carbon::parse($this->subscription_expired)->diffForHumans();
+                } else {
+                    // count days
+                    $days = $expired_date - $current_date;
+                    $days = $days / (60 * 60 * 24);
+                    $days = round($days);
+                    return __(':days days left', ['days' => $days]);
+                }
+            }
+        } else {
+            return '-';
+        }
     }
 
     // get booliean expired subscription
     public function getIsExpiredSubscriptionAttribute()
     {
-		if($this->level != 'admin'){
-			if ($this->active_subscription == 'inactive') {
-				return true;
-			} else if ($this->active_subscription == 'lifetime') {
-				return false;
-			} else if ($this->active_subscription == 'active') {
-				$expired_date = $this->subscription_expired;
-				$expired_date = strtotime($expired_date);
-				$current_date = strtotime(date('Y-m-d H:i:s'));
-				if ($expired_date < $current_date) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}else{
-			return false;
-		}
+        if ($this->level != 'admin') {
+            if ($this->active_subscription == 'inactive') {
+                return true;
+            } else if ($this->active_subscription == 'lifetime') {
+                return false;
+            } else if ($this->active_subscription == 'active') {
+                $expired_date = $this->subscription_expired;
+                $expired_date = strtotime($expired_date);
+                $current_date = strtotime(date('Y-m-d H:i:s'));
+                if ($expired_date < $current_date) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 
     // get total device connect and disconnect

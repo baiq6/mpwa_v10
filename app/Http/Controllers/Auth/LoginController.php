@@ -17,14 +17,15 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    
-    public function index(){
+
+    public function index()
+    {
         return view('theme::auth.login');
     }
 
     public function store(Request $request)
-	{
-		$request->validate([
+    {
+        $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
@@ -39,16 +40,23 @@ class LoginController extends Controller
             ]);
         }
 
-        // 3. Jika user ada, baru coba untuk login
-		$remember = $request->filled('remember');
-		if (Auth::attempt($request->only(['username', 'password']), $remember)) {
-			$request->session()->regenerate();
-			return redirect('/home');
-		}
+
+        // 3. Cek apakah email sudah diverifikasi
+        if (is_null($user->email_verified_at)) {
+            return back()->withInput()->with('alert', [
+                'type' => 'danger',
+                'msg' => __('Silakan verifikasi email Anda terlebih dahulu.')
+            ]);
+        }
+        $remember = $request->filled('remember');
+        if (Auth::attempt($request->only(['username', 'password']), $remember)) {
+            $request->session()->regenerate();
+            return redirect('/home');
+        }
 
         // 4. Jika sampai sini dan login gagal, berarti password-nya yang salah
         throw ValidationException::withMessages([
             'password' => __('auth.password_incorrect'),
         ]);
-	}
+    }
 }
