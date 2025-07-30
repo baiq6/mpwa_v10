@@ -33,8 +33,6 @@
     "Add User": "Tambahkan Pengguna",
     "Admin": "Admin",
     "admin": "admin",
-    "auth.password_incorrect": "Kata sandi salah.",
-    "auth.username_not_registered": "Nama pengguna belum terdaftar.",
     "Admin Account": "Akun Admin",
     "Admin Panel": "Panel Admin",
     "Admins cannot purchase a plan.": "Admin tidak dapat membeli paket.",
@@ -1116,12 +1114,5 @@
     "Your sender is not connected!": "Pengirim Anda tidak terhubung!",
     "Your subscription has expired, please renew your subscription.": "Langganan Anda telah berakhir, silakan perbarui langganan Anda.",
     "Your subscription is expired. Please renew your subscription.": "Langganan Anda telah berakhir. Harap perbarui langganan Anda.",
-    "© :year :site_name. All rights reserved.": "© :year :site_name. Semua hak dilindungi undang-undang.",
-    "emails.reset_password.title": "Reset Kata Sandi Anda",
-    "emails.reset_password.greeting": "Halo!",
-    "emails.reset_password.intro": "Kami menerima permintaan untuk mereset kata sandi akun Anda. Silakan klik tombol di bawah ini untuk mengatur kata sandi baru.",
-    "emails.reset_password.button": "Reset Kata Sandi",
-    "emails.reset_password.notice": "Jika Anda tidak meminta reset kata sandi, abaikan email ini. Kata sandi Anda tidak akan berubah.",
-    "emails.reset_password.link_help": "Jika tombol di atas tidak berfungsi, salin dan tempel tautan berikut ke browser Anda:",
-    "emails.reset_password.copyright": "© :year :site_name. Seluruh hak cipta dilindungi."
+    "© :year :site_name. All rights reserved.": "© :year :site_name. Semua hak dilindungi undang-undang."
 }

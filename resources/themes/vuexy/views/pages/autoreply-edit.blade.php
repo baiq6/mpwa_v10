@@ -89,7 +89,7 @@
 								<label class="form-label">{{ __('Type Keyword') }}</label>
 								<div class="d-flex flex-wrap gap-3 mt-1">
 									<div class="form-check">
-										<input type="radio" value="Equal" name="type_keyword" class="form-check-input" id="keywordTypeEqual" @if ($autoreply->type_keyword == 'Equal') checked @endif>
+										<input type="radio" value="Equal" name="type_keyword" checked class="form-check-input" id="keywordTypeEqual" @if ($autoreply->type_keyword == 'Equal') checked @endif>
 										<label class="form-check-label" for="keywordTypeEqual">{{ __('Equal') }}</label>
 									</div>
 									<div class="form-check">
@@ -110,7 +110,7 @@
 										<label class="form-check-label" for="replyWhenPersonal">{{ __('Personal') }}</label>
 									</div>
 									<div class="form-check">
-										<input type="radio" value="All" name="reply_when" class="form-check-input" id="replyWhenAll" @if ($autoreply->reply_when == 'All') checked @endif>
+										<input type="radio" value="All" checked name="reply_when" class="form-check-input" id="replyWhenAll" @if ($autoreply->reply_when == 'All') checked @endif>
 										<label class="form-check-label" for="replyWhenAll">{{ __('All') }}</label>
 									</div>
 								</div>

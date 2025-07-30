@@ -54,12 +54,6 @@
 								</li>
 				</ul>
 			</div>
-            @if (session()->has('alert'))
-                <x-alert>
-                    @slot('type', session('alert')['type'])
-                    @slot('msg', session('alert')['msg'])
-                </x-alert>
-            @endif
             <h4 class="mb-1">{{__('Reset Password')}}</h4>
             <p class="mb-6">
               <span class="fw-medium">{{__('Enter your email address to send a reset link')}}</span>
@@ -77,7 +71,7 @@
                     placeholder="{{__('email')}}"
                     aria-describedby="email" />
 				  <p class="text-danger">
-                    @error('email')
+                    @error('username')
                         {{ $message }}
                     @enderror
                   </p>

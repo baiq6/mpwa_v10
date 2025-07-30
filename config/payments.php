@@ -85,11 +85,11 @@
     'title' => 'Bank transfer',
     'html' => 'PHA+TmFtZTogPHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoMCwgMTAyLCAyMDQpOyI+VG9tIENydWlzZTwvc3Bhbj48L3A+PHA+QmFuayBuYW1lOiA8c3BhbiBzdHlsZT0iY29sb3I6IHJnYigwLCAxMDIsIDIwNCk7Ij5CQ0E8L3NwYW4+PC9wPjxwPklCQU46IDxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDAsIDEwMiwgMjA0KTsiPjM4ODM0ODczNDg3ODwvc3Bhbj48L3A+PHA+U29mdENvZGU6IDxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDAsIDEwMiwgMjA0KTsiPklCQ0E4NDM4MzRYWDwvc3Bhbj48L3A+PHA+QWNjb3VudCBObzogPHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoMCwgMTAyLCAyMDQpOyI+MTExMTExMTExMTE8L3NwYW4+PC9wPjxwPjxicj48L3A+PHA+QWZ0ZXIgdGhlIHRyYW5zZmVyLCBwbGVhc2Ugc2VuZCB0aGUgdHJhbnNmZXIgcmVjZWlwdCB0byB0aGUgZm9sbG93aW5nIGVtYWlsOiBhZG1pbkB5b3Vyc2l0ZS5jb208L3A+PHA+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoMjMwLCAwLCAwKTsiPiogTm90ZTogT25jZSB0aGUgdHJhbnNmZXIgaXMgY29uZmlybWVkLCB5b3VyIHBsYW4gd2lsbCBiZSBhY3RpdmF0ZWQgaW1tZWRpYXRlbHkuPC9zcGFuPjwvcD4=',
   ),
-  'fawaterk' => 
+  'fawaterk' =>
   array (
-    'status' => 'disable',
-    'api_key' => NULL,
+    'status'       => 'enable',
+    'api_key'      => '0f95327f0c972c4a68fa902fded6ddc6902563b1c24eb4196e',
     'provider_key' => 'FAWATERAK.1432',
-    'mode' => 'sandbox',
+	'mode' => 'sandbox',
   ),
 );

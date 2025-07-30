@@ -1114,12 +1114,5 @@
     "Your sender is not connected!": "Your sender is not connected!",
     "Your subscription has expired, please renew your subscription.": "Your subscription has expired, please renew your subscription.",
     "Your subscription is expired. Please renew your subscription.": "Your subscription is expired. Please renew your subscription.",
-    "© :year :site_name. All rights reserved.": "© :year :site_name. All rights reserved.",
-    "emails.reset_password.title": "Reset Your Password",
-    "emails.reset_password.greeting": "Hello!",
-    "emails.reset_password.intro": "We received a request to reset your password. Click the button below to set a new password for your account.",
-    "emails.reset_password.button": "Reset Password",
-    "emails.reset_password.notice": "If you did not request a password reset, please ignore this email. Your password will remain unchanged.",
-    "emails.reset_password.link_help": "If the button above does not work, copy and paste this link into your browser:",
-    "emails.reset_password.copyright": "© :year :site_name. All rights reserved."
+    "© :year :site_name. All rights reserved.": "© :year :site_name. All rights reserved."
 }

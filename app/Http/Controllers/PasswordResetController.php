@@ -24,73 +24,64 @@ use App\Models\User;
 
 class PasswordResetController extends Controller
 {
-	public function showLinkRequestForm()
-	{
-		return view('theme::auth.passwords.email');
-	}
+    public function showLinkRequestForm()
+    {
+        return view('theme::auth.passwords.email');
+    }
 
-	public function sendResetLinkEmail(Request $request)
+    public function sendResetLinkEmail(Request $request)
 	{
-		// Validasi input, error otomatis dilempar ke view oleh Laravel
 		$request->validate(['email' => 'required|email']);
 		$user = User::where('email', $request->email)->first();
 
-		// Jika email tidak ditemukan, tampilkan alert manual
 		if (!$user) {
 			return back()->with('alert', [
-				'type' => 'danger',
+				'type' => 'danger', 
 				'msg' => __('Email does not exist.')
-			])->withInput();
+			]);
 		}
 
 		$token = Password::createToken($user);
 		$url = URL::to('/password/reset', $token) . '?email=' . urlencode($request->email);
-
+		
 		try {
 			Mail::to($request->email)->send(new ResetPasswordMail($url));
 		} catch (\Throwable $th) {
 			return redirect('login')->with('alert', [
-				'type' => 'danger',
+				'type' => 'danger', 
 				'msg' => __('There is an issue with your SMTP settings')
 			]);
 		}
 
 		return redirect('login')->with('alert', [
-			'type' => 'success',
+			'type' => 'success', 
 			'msg' => __('We have emailed your password reset link!')
 		]);
 	}
 
-	public function showResetForm(Request $request, $token = null)
+    public function showResetForm(Request $request, $token = null)
 	{
 		$email = $request->email;
 
 		$tokenData = DB::table('password_resets')->where('email', $email)->first();
 
 		if (!$tokenData || !Hash::check($token, $tokenData->token)) {
-			// Tampilkan view error khusus, tidak redirect
-			return response()->view('theme::auth.passwords.reset-error', [
+			return redirect('/password/reset')->with('alert', [
+				'type' => 'danger', 
 				'msg' => __('Invalid token or email')
 			]);
 		}
 
-		// Pastikan alert dari session tetap dikirim ke view jika ada
-		$alert = session('alert');
-		return view('theme::auth.passwords.reset', [
-			'token' => $token,
-			'email' => $email,
-			'alert' => $alert
-		]);
+		return view('theme::auth.passwords.reset')->with(['token' => $token, 'email' => $email]);
 	}
 
 
-	public function reset(Request $request)
+    public function reset(Request $request)
 	{
-		// Validasi input, error otomatis dilempar ke view oleh Laravel
 		$request->validate([
 			'token' => 'required',
 			'email' => 'required|email',
-			'password' => 'required|string|confirmed',
+			'password' => 'required|string|min:8|confirmed',
 		]);
 
 		$status = Password::reset(
@@ -107,22 +98,15 @@ class PasswordResetController extends Controller
 		);
 
 		if ($status === Password::PASSWORD_RESET) {
-			// Hapus token reset password manual dari database
-			DB::table('password_resets')->where('email', $request->email)->delete();
-			// Tampilkan alert sukses di halaman reset, jangan redirect, dan kirim flag sukses
-			return back()->with([
-				'alert' => [
-					'type' => 'success',
-					'msg' => __('Your password has been reset successfully.')
-				],
-				'reset_success' => true
+			return redirect()->route('login')->with('alert', [
+				'type' => 'success',
+				'msg' => __('Your password has been reset successfully.')
 			]);
 		} else {
-			// Jika gagal reset (bukan error validasi input), tampilkan alert gagal di halaman reset
 			return back()->with('alert', [
 				'type' => 'danger',
 				'msg' => __($status)
-			])->withInput();
+			]);
 		}
 	}
 }
